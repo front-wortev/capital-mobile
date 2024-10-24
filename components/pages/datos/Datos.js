@@ -85,9 +85,7 @@ export const Datos = ({navigation}) => {
   
     const fetchResult = await useFetch(apiBase + endPoint, headers, 'POST', formData, 'formData');
   
-    console.log(fetchResult);
     
-  
     if(fetchResult.message === 'success') {
       navigation.navigate('Slider');
     } else if (fetchResult.message === 'Error') {

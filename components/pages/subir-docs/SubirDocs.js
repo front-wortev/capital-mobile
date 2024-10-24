@@ -9,11 +9,54 @@ import { useSelector } from 'react-redux';
 import { LinearGradient } from 'expo-linear-gradient';
 import { SvgUri } from 'react-native-svg';
 
+const docs = [
+  {
+    title: 'INE',
+  },
+  {
+    title: 'Estado de cuenta bancario actual',
+  },
+  {
+    title: 'Constancia de situación fiscal / Comprobante de domicilio',
+  },
+  {
+    title: 'RFC',  
+  },
+  {
+    title: 'CURP',
+  }
+]
+      
+const docsMoral = [
+  
+  {
+    title: 'Acta constitutiva',
+  },
+  {
+    title: 'RFC de la empresa',
+  },
+  {
+    title: 'Carátula de edo. de cuenta',
+  },
+  {
+    title: 'Comprobante de domicilio de la empresa',  
+  },
+  {
+    title: 'Poder notarial',
+  },
+  {
+    title: 'Identificación del representante legal',
+  },
+  {
+    title: 'Comprobante de domicilio del representante',  
+  },
+]
+
 export const SubirDocs = ({onPress, onPressButton}) => {
 
   const headerHeight = useHeaderHeight();
 
-  const userData = useSelector((state) => state.user.userData)
+  const personType = useSelector((state) => state.auth.personType)
   const dataScreen = useSelector((state) => state.data.subirDocs.data)
 
   const imgDocs = dataScreen?.image_docs?.data?.attributes;
@@ -42,19 +85,20 @@ export const SubirDocs = ({onPress, onPressButton}) => {
         <Image
           source={{ uri: uriImage }}
           alt={alternativeText}
+          style={{width: 193, height: 106}}
         />
       ) : null}
 
       <View style={subirDocsStyles.flatlist}>
 
         {
-          userData.person_type === 'persona_fisica_sf' ? 
+          personType === 'persona_fisica_sf' ? 
 
           <FlatList 
-            data={dataScreen.docs_list_fis}
+            data={docs}
             renderItem={({item}) => {
               return(
-              <Texts type='p'>{`\u2022 ${item.key}`}</Texts>
+                <Texts type='p'>{`\u2022 ${item.title}`}</Texts>
               );
             }}
           />
@@ -62,10 +106,10 @@ export const SubirDocs = ({onPress, onPressButton}) => {
           :
 
           <FlatList 
-            data={dataScreen.docs_list_moral}
+            data={docsMoral}
             renderItem={({item}) => {
               return(
-              <Texts type='p'>{`\u2022 ${item.key}`}</Texts>
+              <Texts type='p'>{`\u2022 ${item.title}`}</Texts>
               );
             }}
           />

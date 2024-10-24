@@ -2,6 +2,7 @@ import React from 'react';
 import { View, StyleSheet, Image } from 'react-native';
 import Swiper from 'react-native-swiper';
 import { Texts } from '../../atoms/Texts';
+import { inicioStyles } from '../inicio/inicioStyles';
 import { SvgUri } from 'react-native-svg';
 
 const SliderDocumentos = ({ data, currentIndex, onIndexChanged }) => {
@@ -15,7 +16,7 @@ const SliderDocumentos = ({ data, currentIndex, onIndexChanged }) => {
           <Image
             source={{ uri: `https://strapi.wortev.com${item.image1}` }}
             alt={item.alt}
-            style={inicioStyles.image}
+            style={styles.image}
           />
         ) : null}
         
@@ -26,7 +27,7 @@ const SliderDocumentos = ({ data, currentIndex, onIndexChanged }) => {
           <Image
             source={{ uri: `https://strapi.wortev.com${item.image2}` }}
             alt={item.alt}
-            style={inicioStyles.image}
+            style={styles.image}
           />
         ) : null}
         <Texts type='h3' extraStyles={styles.description}>{item.description}</Texts>
@@ -68,6 +69,8 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   image:{
+    width: '100%',
+    height: 100,
   },
   description: {
     textAlign: 'center',

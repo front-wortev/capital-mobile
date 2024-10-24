@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { View, ScrollView, Modal, Pressable, Platform } from 'react-native'
 import { API_BASE } from '@env'
 import { Header } from '../reusable-invesionista/Header'
@@ -11,28 +11,24 @@ import { Button } from '../../atoms/Button'
 import { DropdownPicker } from '../../organisms/Dropdown'
 import { InputDocument } from '../../organisms/InputDocument'
 import { countries } from '../../constants/contextualData'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { LinearGradient } from 'expo-linear-gradient'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import { FontAwesome6 } from '@expo/vector-icons'
 
 export const Documentos = ({navigation}) => { 
 
-  const dispatch = useDispatch()
   const tokenRedux = useSelector((state) => state.session.token)
-  const slideDocsImages = useSelector((state) => state.data.slideImages.data);
-
+  const slideDocsImages = useSelector((state) => state.data.slideImages.data.attributes.slideImages.data);
   const docsImages = slideDocsImages.map((item) => {
-    return item.attributes.image_slide.data.map((image) => {
-        return {
-        url: image.attributes.url,
-        name: image.attributes.name,
-        alternativeText: image.attributes.alternativeText,
-        mime: image.attributes.mime,
-        };
-    });
-  }).flat()
-
+    return {
+      url: item.attributes.url,
+      name: item.attributes.name,
+      alternativeText: item.attributes.alternativeText,
+      mime: item.attributes.mime,
+    };
+})
+  
   const data = [
     {
       title1: 'INE - Cara frontal',
@@ -81,7 +77,6 @@ export const Documentos = ({navigation}) => {
   const [ reversoFormaMigratoria, setReversoFormaMigratoria ] = useState({})
   const [ caratulaPasaporte, setCaratulaPasaporte ] = useState({})
 
-  
   const handleIndexChanged = (index) => {
     setCurrentIndex(index);
   };
@@ -145,6 +140,7 @@ export const Documentos = ({navigation}) => {
     setCaratulaPasaporte(datos)
   };
 
+
   const isValid = () => {
     const isExtranjeroValid = personaExtranjera === 1 && 
       anversoID.uri && 
@@ -174,7 +170,6 @@ export const Documentos = ({navigation}) => {
     return !isValid();
   };
 
-  console.log(isValid())
 
   const handleDocs = async() => {
     const apiBase = API_BASE
@@ -281,6 +276,7 @@ export const Documentos = ({navigation}) => {
     }
   }
     
+  
   return (
     <ScrollView style={{height: '100%'}}>
       <LinearGradient

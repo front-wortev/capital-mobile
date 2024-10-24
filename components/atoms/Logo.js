@@ -1,5 +1,6 @@
 import React from 'react';
 import { SvgUri } from "react-native-svg"
+import { Image } from 'react-native';
 import { useSelector } from 'react-redux';
 
 export const Logo = (props) => {
@@ -31,8 +32,7 @@ export const Logo = (props) => {
           source={{
             uri: imageLogo,
           }}
-          alt={contentData.Img_inicio.data.attributes.alternativeText}
-          style={inicioStyles.vector}
+          alt={logo.alternativeText}
         />
 
       }

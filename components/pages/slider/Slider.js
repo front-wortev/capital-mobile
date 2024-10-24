@@ -9,9 +9,10 @@ import { useSelector } from 'react-redux';
 export const Slider = ({navigation}) => {
 
   const userData = useSelector((state) => state.user.userData)
+  const personType = useSelector((state) => state.auth.personType)
 
   const handleTypePerson = () => {
-    if ( userData.person_type === 'persona_fisica_sf' ) {
+    if ( userData.person_type === 'persona_fisica_sf' || personType === 'persona_fisica_sf' ) {
       navigation.navigate('DatosInversionista')
     } else {
       navigation.navigate('Datos-inversionista-moral')

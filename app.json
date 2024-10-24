@@ -36,10 +36,11 @@
       "intentFilters": [
         {
           "action": "VIEW",
+          "autoVerify": true,
           "data": [
             {
-              "scheme": "https",
-              "host": "cappital",
+              "scheme": "cappital",
+              "host": "verified-email",
               "pathPrefix": "/"
             }
           ],
@@ -63,9 +64,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "f4d09ed0-ab69-46d5-b863-03e3122639af"
+        "projectId": "2994306f-1161-45d1-ad9a-893a09eb253e"
       }
     },
-    "owner": "josewortev"
+    "owner": "gerawortev"
   }
 }
